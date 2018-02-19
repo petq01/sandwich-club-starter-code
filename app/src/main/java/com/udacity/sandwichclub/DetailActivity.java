@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         String json = sandwiches[position];
 
         try {
-            Sandwich   sandwich = JsonUtils.parseSandwichJson(json);
+            Sandwich sandwich = JsonUtils.parseSandwichJson(json);
             if (sandwich == null) {
                 // Sandwich data unavailable
                 closeOnError();
@@ -75,9 +75,28 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void populateUI(Sandwich sandwich) {
-        origin.setText(sandwich.getPlaceOfOrigin());
-        alsoKnown.setText(sandwich.getAlsoKnownAs().toString());
-        desc.setText(sandwich.getDescription());
-        ingredients.setText(sandwich.getIngredients().toString());
+        if (sandwich.getPlaceOfOrigin().isEmpty() || sandwich.getPlaceOfOrigin() == "") {
+            origin.setText(getResources().getString(R.string.notAvalable));
+        } else {
+            origin.setText(sandwich.getPlaceOfOrigin());
+        }
+
+        if (sandwich.getAlsoKnownAs().isEmpty()) {
+            origin.setText(getResources().getString(R.string.notAvalable));
+        } else {
+            alsoKnown.setText(sandwich.getAlsoKnownAs().toString());
+        }
+
+        if (sandwich.getDescription().isEmpty() || sandwich.getDescription() == "") {
+            origin.setText(getResources().getString(R.string.notAvalable));
+        } else {
+            desc.setText(sandwich.getDescription());
+        }
+        if (sandwich.getIngredients().isEmpty()) {
+            origin.setText(getResources().getString(R.string.notAvalable));
+        } else {
+            ingredients.setText(sandwich.getIngredients().toString());
+        }
     }
+
 }
